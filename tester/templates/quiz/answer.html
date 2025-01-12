@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends "quiz/base.html" %}
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Answer
+</title>{% endblock %}
+</head>
+<body>
+{% block content %}
+<h1>{{ question.question_text }} </h1>
+
+<ul>
+  {% for answer in question.answer_set.all %}
+    <li> {{ answer.answer_text }} - {{ answer.user_choice }} user choice</li>
+  {% endfor %}
+</ul>
+
+<a href="{% url 'quest' question.id %}">Try again?</a><br>
+<a href="/home">Back</a>
+{% endblock %}
+</body>
+</html>

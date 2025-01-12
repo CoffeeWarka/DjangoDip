@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% extends "quiz/base.html" %}
+<html lang="en">
+{% load static %}
+<link rel="stylesheet" href="{% static 'style.css' %}">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}<title>Home</title>{% endblock %}
+</head>
+<body>
+<h1 align="center">Welcome to Statistic Hub!</h1>
+{% block content %}
+{% if user.is_authenticated %}
+    <h1>Hi, {{ user.username }}!
+        {% if all_questions %}
+            Answer me!</h1><br>
+
+            <ol>
+                {% for question in all_questions %}
+                    <li><a href="{% url 'quest' question.id %}">{{ question.question_text }}</a></li>
+                {% endfor %}
+            </ol>
+        {% else %}
+            <p>There are no questions.</p>
+        {% endif %}
+{% else %}
+<h1 align="center">Welcome to Statistic Hub!<br>
+    You are not logged in<br>
+<a href="{% url 'login' %}">Log In</a></h1>
+{% endif %}
+{% endblock %}
+</body>
+</html>
