@@ -15,11 +15,29 @@
         {% if all_questions %}
             Answer me!</h1><br>
 
-            <ol>
-                {% for question in all_questions %}
-                    <li><a href="{% url 'quest' question.id %}">{{ question.question_text }}</a></li>
-                {% endfor %}
-            </ol>
+            <div class="row">
+{% for quest in page_quest %}
+    <div>
+        <h2><a href="answer">{{ quest.question_text }}"</a></h2>
+    </div>
+{% endfor %}
+        <div class="pagination">
+        <span class="step-links">
+            {% if page_quest.has_previous %}
+                <a href="?page=1">&laquo; Первая</a>
+                <a href="?page={{ page_quest.previous_page_number }}">Предыдущая</a>
+            {% endif %}
+
+            <span class="current">
+                Страница {{ page_quest.number }} из {{ page_quest.paginator.num_pages }}.
+            </span>
+
+            {% if page_quest.has_next %}
+                <a href="?page={{ page_quest.next_page_number }}">Следующая</a>
+                <a href="?page={{ page_quest.paginator.num_pages }}">Последняя &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
         {% else %}
             <p>There are no questions.</p>
         {% endif %}

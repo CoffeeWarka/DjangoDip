@@ -11,10 +11,11 @@ from django.core.paginator import Paginator
 @login_required
 def home(request):
     all_questions = Question.objects.all()
-    paginator = Paginator(all_questions, 2)
+    paginator = Paginator(all_questions, 6)
     page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-    return render(request, "quiz/home.html", {'all_questions': all_questions, 'page_obj': page_obj})
+    page_quest = paginator.get_page(page_number)
+    return render(request, "quiz/home.html", {'all_questions': all_questions, 'page_quest': page_quest})
+
 
 @login_required
 def choose_question(request, question_id):

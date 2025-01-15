@@ -22,7 +22,6 @@ from django.contrib.auth import views as dj_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
     path('<int:question_id>quest/', views.choose_question, name='quest'),
     path('<int:question_id>/answer/', views.question_answer, name='answer'),
     path('<int:question_id>/user_choice/', views.user_choice, name='user_choice'),
